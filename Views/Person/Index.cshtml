@@ -1,0 +1,96 @@
+@model List<Person>
+
+@{
+    ViewData["Title"] = "Listado de Personas";
+
+    Pagination pager = new Pagination();
+
+    int pageNo = 0;
+    if (ViewBag.Pagination != null)
+    {
+        pager = ViewBag.Pagination;
+        pageNo = pager.CurrentPage;
+    }
+}
+
+<div class="card">
+    <div class="card-head">
+        <h1 class="text-center m-2">Listado de Personas</h1>
+        <a asp-action="AddPerson" class="btn btn-success m-3">Agregar Persona</a>
+    </div>
+
+    <div class="car-body">
+        <table class="table table-bordered table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Celular</th>
+                    <th>Genero</th>
+                    <th class="text-center">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.firstName</td>
+                        <td>@item.lastName</td>
+                        <td>@item.cellPhone</td>
+                        <td>@item.gender</td>
+                        <td class="text-center">
+                            <a class="btn btn-dark" asp-action="Details" asp-route-Id="@item.Id">Detalles</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="container">
+            @if (pager.TotalPages > 0)
+            {
+                <ul class="pagination justify-content-end">
+
+                    @if (pager.CurrentPage > 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-controller="Person" asp-action="Index" asp-route-pg="1">1RO</a>
+                        </li>
+
+                        <li class="page-item">
+                            <a class="page-link" asp-controller="Person" asp-action="Index" asp-route-pg="@(pager.CurrentPage - 1)">Ant</a>
+                        </li>
+                    }
+
+                    @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+                    {
+                        <li class="page-item@(pge == pager.CurrentPage ? "active" :"active")">
+                            <a class="page-link" asp-controller="Person" asp-action="Index" asp-route-pg="@pge">@pge</a>
+                        </li>
+                    }
+                    
+                    @if (pager.CurrentPage < pager.TotalPages)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-controller="Person" asp-action="Index" asp-route-pg="@(pager.CurrentPage + 1)">Prox</a>
+                        </li>
+
+                        <li class="page-item">
+                            <a class="page-link" asp-controller="Person" asp-action="Index" asp-route-pg="@(pager.TotalPages - 1)">Ult</a>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+    <div class="card-footer" style="display: flex; justify-content: space-between;">
+        <div>
+            <h6>Creado por <a style="text-decoration: none; color: black" href="https://github.com/Emmanuel0722"><strong placeholder="Perfil del dueño.">Emmanuel Acosta</strong></a></h6>
+        </div>
+        <div>
+            <h6 class="text-end">@DateTime.Now</h6>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@model List<Person>
+
+@{
+    ViewData["Title"] = "Listado de Personas";
+}
+
+<div class="card">
+    <div class="card-head">
+        <span>Listado de Personas</span>
+    </div>
+
+    <div class="car-body">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Celular</th>
+                    <th>Genero</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.firstName</td>
+                        <td>@item.lastName</td>
+                        <td>@item.cellPhone</td>
+                        <td>@item.gender</td>
+                        <td>Opciones</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

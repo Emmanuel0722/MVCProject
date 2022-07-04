@@ -1,0 +1,31 @@
+@model MVCProject.Models.Person
+
+@{
+    ViewData["Title"] = "Detalles de Personas";
+}
+
+<h2 class="text-center">Detalles</h2>
+
+<hr />
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Id)</dt>
+        <dd class ="col-sm-10">@Html.DisplayFor(model => model.Id)</dd>
+        
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.firstName)</dt>
+        <dd class ="col-sm-10">@Html.DisplayFor(model => model.firstName)</dd>
+        
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.lastName)</dt>
+        <dd class ="col-sm-10">@Html.DisplayFor(model => model.lastName)</dd>
+        
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.cellPhone)</dt>
+        <dd class ="col-sm-10">@Html.DisplayFor(model => model.cellPhone)</dd>
+        
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.gender)</dt>
+        <dd class ="col-sm-10">@Html.DisplayFor(model => model.gender)</dd>
+    </dl>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-Id="@Model?.Id">Editar</a> | 
+    <a class="btn btn-danger" asp-action="Delete" asp-route-Id="@Model?.Id">Eliminar</a> | 
+    <a class="btn btn-dark" asp-action="Index">Regresar</a>
+</div>
